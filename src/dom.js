@@ -19,7 +19,16 @@ const todoDOM = (function () {
         let title = todoForm.title.value;
         let description = todoForm.description.value;
         let dueDate = todoForm.dueDate.value;
-        let priority = todoForm.priority.value;
+
+        let priority;
+        if (document.querySelector("#low").checked) {
+            priority = "Low";
+        } else if (document.querySelector("#medium").checked) {
+            priority = "Medium";
+        } else if (document.querySelector("#high").checked) {
+            priority = "High";
+        }
+
         let notes = todoForm.notes.value;
         createTodoObject(title, description, dueDate, priority, notes);
         createTodoDOM(title, description, dueDate, priority, notes);
@@ -47,13 +56,20 @@ const todoDOM = (function () {
         const todoNotes = document.createElement("p");
         todoNotes.textContent = notes;
 
-        const todoStatus = document.createElement("p");
-        todoStatus.textContent = "unchecked"; // the default value of Todo.check is false | apply a check logic later, for now it's just text
+        const todoStatus = document.createElement("input"); // not yet styled. this should be next to the todo title or something.
+        todoStatus.setAttribute("type", "checkbox");
+        todoStatus.setAttribute("id", "todoStatus");
+        todoStatus.setAttribute("name", "todoStatus");
 
         todoContainer.appendChild(todoTitle);
         todoContainer.appendChild(todoDescription);
         todoContainer.appendChild(todoDueDate);
         todoContainer.appendChild(todoPriority);
         todoContainer.appendChild(todoNotes);
+        todoContainer.appendChild(todoStatus);
+
+        todoStatus.addEventListener("click", () => {
+            console.log(todoStatus.checked);
+        });
     };
 })();
