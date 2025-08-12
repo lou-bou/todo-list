@@ -30,13 +30,14 @@ const todoDOM = (function () {
         }
 
         let notes = todoForm.notes.value;
-        createTodoObject(title, description, dueDate, priority, notes);
-        createTodoDOM(title, description, dueDate, priority, notes);
+        let todo = createTodoObject(title, description, dueDate, priority, notes);
+        createTodoDOM(todo, title, description, dueDate, priority, notes);
     });
 
-    const createTodoDOM = (title, description, dueDate, priority, notes) => {
+    const createTodoDOM = (todo, title, description, dueDate, priority, notes) => {
         const body = document.querySelector("body");
         const todoContainer = document.createElement("div");
+        todoContainer.setAttribute("data-todo-id", `${todo.id}`);
         todoContainer.setAttribute("class", "todo-container");
 
         body.appendChild(todoContainer);
@@ -67,9 +68,5 @@ const todoDOM = (function () {
         todoContainer.appendChild(todoPriority);
         todoContainer.appendChild(todoNotes);
         todoContainer.appendChild(todoStatus);
-
-        todoStatus.addEventListener("click", () => {
-            console.log(todoStatus.checked);
-        });
     };
 })();

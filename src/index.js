@@ -18,6 +18,7 @@ class Project {
 }
 
 export class Todo {
+    id;
     title; // string
     description; // string
     dueDate; // string (formatted date)
@@ -26,6 +27,7 @@ export class Todo {
     check; // boolean (flase for unchecked and true for checked)
 
     constructor(title, description, dueDate, priority, notes) {
+        this.id = crypto.randomUUID();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate; // use format(new Date(XXXX, YY, ZZ), "MM/dd/yyyy")
@@ -38,6 +40,7 @@ export class Todo {
 export function createTodoObject(todoForm, title, description, dueDate, priority, notes) {
     let newTodo = new Todo(title, description, dueDate, priority, notes);
     defaultProject.addTodo(newTodo);
+    return newTodo;
 }
 
 let defaultProject = new Project("Default", "The default project");
