@@ -7,7 +7,7 @@
 </head>
 <body>
     <button class="add-todo">Add Todo</button>
-    <dialog>
+    <dialog id="todo-dialog">
         <form action="" method="dialog" id="todo-form">
             <div>
                 <label for="title">Title: </label>
@@ -46,6 +46,11 @@
             <div>
                 <label for="notes"></label>
                 <input type="textarea" id="notes" name="notes">
+            </div>
+
+            <div>
+                <button type="submit" class="submit">Add Todo</button>
+                <button class"cancel">Cancel</button>
             </div>
         </form>
     </dialog>
