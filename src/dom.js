@@ -68,5 +68,18 @@ const todoDOM = (function () {
         todoContainer.appendChild(todoPriority);
         todoContainer.appendChild(todoNotes);
         todoContainer.appendChild(todoStatus);
+
+        todoStatus.addEventListener("click", () => {
+            changeStatus(todoStatus, todo); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
+        });
     };
+
+    const changeStatus = (todoStatusCheckbox, todoObject) => {
+        if (todoStatusCheckbox.checked) {
+            todoObject.check = true;
+        } else {
+            todoObject.check = false;
+        }
+        console.log(todoObject);
+    }
 })();
