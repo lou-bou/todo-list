@@ -17,7 +17,7 @@ class Project {
     }
 }
 
-class Todo {
+export class Todo {
     title; // string
     description; // string
     dueDate; // string (formatted date)
@@ -33,6 +33,11 @@ class Todo {
         this.notes = notes;
         this.check = false;
     }
+}
+
+export function createTodoObject(todoForm, title, description, dueDate, priority, notes) {
+    let newTodo = new Todo(title, description, dueDate, priority, notes);
+    defaultProject.addTodo(newTodo);
 }
 
 let defaultProject = new Project("Default", "The default project");
