@@ -6,6 +6,11 @@ const cancelTodoButton = document.querySelector("#todo-form .cancel");
 const todoDialog = document.querySelector("#todo-dialog");
 export const todoForm = document.querySelector("#todo-form");
 
+const submitEditTodoButton = document.querySelector("#todo-edit-form .edit");
+const cancelEditTodoButton = document.querySelector("#todo-edit-form .cancel");
+const todoEditDialog = document.querySelector("#todo-edit-dialog");
+const todoEditForm = document.querySelector("#todo-edit-form");
+
 const todoDOM = (function () {
     addTodoButton.addEventListener("click", () => {
         todoDialog.showModal();
@@ -27,6 +32,8 @@ const todoDOM = (function () {
             priority = "Medium";
         } else if (document.querySelector("#high").checked) {
             priority = "High";
+        } else {
+            priority = null; // this will be deleted later when i apply form validiations
         }
 
         let notes = todoForm.notes.value;
@@ -62,15 +69,47 @@ const todoDOM = (function () {
         todoStatus.setAttribute("id", "todoStatus");
         todoStatus.setAttribute("name", "todoStatus");
 
+        const todoEdit = document.createElement("button");
+        todoEdit.textContent = "Edit Todo"
+
         todoContainer.appendChild(todoTitle);
         todoContainer.appendChild(todoDescription);
         todoContainer.appendChild(todoDueDate);
         todoContainer.appendChild(todoPriority);
         todoContainer.appendChild(todoNotes);
         todoContainer.appendChild(todoStatus);
+        todoContainer.appendChild(todoEdit);
 
         todoStatus.addEventListener("click", () => {
             changeStatus(todoStatus, todo); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
+        });
+
+        todoEdit.addEventListener("click", () => {
+            prepareEditForm(todoTitle.textContent, todoDescription.textContent, todoDueDate.textContent, todoNotes.textContent)
+            todoEditDialog.showModal();
+        });
+
+        cancelEditTodoButton.addEventListener("click", () => {
+            todoEditDialog.close();
+        });
+
+        submitEditTodoButton.addEventListener("click", () => {
+            let newTitle = todoEditForm.title.value;
+            let newDescription = todoEditForm.description.value;
+            let newDueDate = todoEditForm.dueDate.value;
+            
+            let newPriority;
+            if (document.querySelector("#new-low").checked) {
+                newPriority = "Low";
+            } else if (document.querySelector("#new-medium").checked) {
+                newPriority = "Medium";
+            } else if (document.querySelector("#new-high").checked) {
+                newPriority = "High";
+            } else {
+                newPriority = null;
+            }
+
+            let newNotes = todoEditForm.notes.value;
         });
     };
 
@@ -81,5 +120,27 @@ const todoDOM = (function () {
             todoObject.check = false;
         }
         console.log(todoObject);
+    }
+
+    const prepareEditForm = (currentTitle, currentDescription, currentDueDate, currentNotes) => {
+        const newTitleInput = document.querySelector("#new-title");
+        newTitleInput.setAttribute("value", currentTitle);
+
+        const newDescriptionInput = document.querySelector("#new-description");
+        newDescriptionInput.setAttribute("value", currentDescription);
+
+        const newDueDateInput = document.querySelector("#new-dueDate");
+        newDueDateInput.setAttribute("value", currentDueDate);
+
+        if (document.querySelector("#low").checked) {
+            document.querySelector("#new-low").setAttribute("checked", "");
+        } else if (document.querySelector("#medium").checked) {
+            document.querySelector("#new-medium").setAttribute("checked", "");
+        } else if (document.querySelector("#high").checked) {
+            document.querySelector("#new-high").setAttribute("checked", "");
+        }
+
+        const newNotesInput = document.querySelector("#new-notes");
+        newNotesInput.setAttribute("value", currentNotes);
     }
 })();
