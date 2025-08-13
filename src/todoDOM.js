@@ -1,3 +1,10 @@
+// Problem:
+/* 
+Creation form data is saved even after submit, to solve this set the value attributes of all input elements to ""
+
+Same problem in projectDOM.js
+*/
+
 import { createTodoObject } from "./index.js";
 
 const addTodoButton = document.querySelector(".add-todo");
@@ -74,9 +81,11 @@ const createTodoDOM = (todoObject, title, description, dueDate, priority, notes)
     todoStatus.setAttribute("name", "todoStatus");
 
     const todoEdit = document.createElement("button");
+    todoEdit.setAttribute("class", "edit-todo");
     todoEdit.textContent = "Edit Todo";
 
     const todoDelete = document.createElement("button");
+    todoEdit.setAttribute("class", "delete-todo");
     todoDelete.textContent = "Delete Todo";
 
     todoContainer.appendChild(todoTitle);
@@ -93,7 +102,7 @@ const createTodoDOM = (todoObject, title, description, dueDate, priority, notes)
     });
 
     todoEdit.addEventListener("click", () => {
-        prepareEditForm(todoTitle.textContent, todoDescription.textContent, todoDueDate.textContent, todoNotes.textContent)
+        prepareEditForm(todoTitle.textContent, todoDescription.textContent, todoDueDate.textContent, todoNotes.textContent);
         todoEditDialog.showModal();
     });
 
@@ -146,7 +155,7 @@ const changeStatus = (todoStatusCheckbox, todoObject) => {
 }
 
 const prepareEditForm = (currentTitle, currentDescription, currentDueDate, currentNotes) => {
-    const newTitleInput = document.querySelector("#new-title");
+    const newTitleInput = document.querySelector("#todo-edit-form #new-title");
     newTitleInput.setAttribute("value", currentTitle);
 
     const newDescriptionInput = document.querySelector("#new-description");
