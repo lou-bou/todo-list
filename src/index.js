@@ -21,6 +21,10 @@ class Project {
         this.description = description;
     }
 
+    delete() {
+        // probably delete it from localStorage
+    }
+
     addTodo(todo) {
         this.todos.push(todo);
     }
@@ -64,7 +68,7 @@ class Todo {
 
     delete() {
         defaultProject.deleteTodo(this);
-        console.log(defaultProject.todos);
+        // probably delete it from localStorage
     }
 }
 

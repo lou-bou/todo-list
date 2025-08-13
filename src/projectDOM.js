@@ -46,9 +46,13 @@ function createProjectDOM(projectObject, title, description) {
     const projectEdit = document.createElement("button");
     projectEdit.textContent = "Edit Project";
 
+    const projectDelete = document.createElement("button");
+    projectDelete.textContent = "Delete Project";
+
     projectContainer.appendChild(projectTitle);
     projectContainer.appendChild(projectDescription);
     projectContainer.appendChild(projectEdit);
+    projectContainer.appendChild(projectDelete);
 
     projectEdit.addEventListener("click", () => {
         prepareEditForm(projectTitle.textContent, projectDescription.textContent);
@@ -69,6 +73,11 @@ function createProjectDOM(projectObject, title, description) {
             projectTitle.textContent = newTitle;
             projectDescription.textContent = newDescription;
         }
+    });
+
+    projectDelete.addEventListener("click", () => {
+        projectsContainer.removeChild(projectContainer);
+        projectObject.delete();
     });
 }
 
