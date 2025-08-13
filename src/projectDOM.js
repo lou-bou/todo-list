@@ -6,6 +6,11 @@ const cancelProjectButton = document.querySelector("#project-dialog .cancel");
 const projectDialog = document.querySelector("#project-dialog");
 const projectForm = document.querySelector("#project-form");
 
+const submitEditProjectButton = document.querySelector("#project-edit-form .edit");
+const cancelEditProjectButton = document.querySelector("#project-edit-form .cancel");
+const projectEditDialog = document.querySelector("#project-edit-dialog");
+const projectEditForm = document.querySelector("#project-edit-form");
+
 addProjectButton.addEventListener("click", () => {
     projectDialog.showModal();
 });
@@ -38,6 +43,18 @@ function createProjectDOM(projectObject, title, description) {
     const projectDescription = document.createElement("p");
     projectDescription.textContent = description;
 
+    const projectEdit = document.createElement("button");
+    projectEdit.textContent = "Edit Project";
+
     projectContainer.appendChild(projectTitle);
     projectContainer.appendChild(projectDescription);
+    projectContainer.appendChild(projectEdit);
+
+    projectEdit.addEventListener("click", () => {
+        projectEditDialog.showModal();
+    });
+
+    cancelEditProjectButton.addEventListener("click", () => {
+        projectEditDialog.close();
+    });
 }

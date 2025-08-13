@@ -89,7 +89,7 @@ const createTodoDOM = (todoObject, title, description, dueDate, priority, notes)
     todoContainer.appendChild(todoDelete);
 
     todoStatus.addEventListener("click", () => {
-        changeStatus(todoStatus, todo); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
+        changeStatus(todoStatus, todoObject); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
     });
 
     todoEdit.addEventListener("click", () => {
