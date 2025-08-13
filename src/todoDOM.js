@@ -40,15 +40,15 @@ submitTodoButton.addEventListener("click", () => {
 
     if (title && dueDate && priority) {
         console.log(title);
-        let todo = createTodoObject(title, description, dueDate, priority, notes);
-        createTodoDOM(todo, title, description, dueDate, priority, notes);
+        let todoObject = createTodoObject(title, description, dueDate, priority, notes);
+        createTodoDOM(todoObject, title, description, dueDate, priority, notes);
     }
 });
 
-const createTodoDOM = (todo, title, description, dueDate, priority, notes) => {
+const createTodoDOM = (todoObject, title, description, dueDate, priority, notes) => {
     const todosContainer = document.querySelector("#todos");
     const todoContainer = document.createElement("div");
-    todoContainer.setAttribute("data-todo-id", `${todo.id}`);
+    todoContainer.setAttribute("data-todo-id", `${todoObject.id}`);
     todoContainer.setAttribute("class", "todo-container");
 
     todosContainer.appendChild(todoContainer);

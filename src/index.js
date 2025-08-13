@@ -1,13 +1,16 @@
 import { format } from "date-fns";
 import "./todoDOM.js";
 import "./projectDOM.js";
+import "./style.css";
 
 class Project {
+    id;
     todos; // string
     title; // string
     description; // string
 
     constructor(title, description) {
+        this.id = crypto.randomUUID();
         this.title = title;
         this.description = description;
         this.todos = [];

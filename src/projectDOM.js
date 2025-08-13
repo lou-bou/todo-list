@@ -19,6 +19,25 @@ submitProjectButton.addEventListener("click", () => {
     let description = projectForm.projectDescription.value;
 
     if (title) {
-        let project = createProjectObject(title, description);
+        let projectObject = createProjectObject(title, description);
+        createProjectDOM(projectObject, title, description);
     }
 });
+
+function createProjectDOM(projectObject, title, description) {
+    const projectsContainer = document.querySelector("#projects");
+    const projectContainer = document.createElement("div");
+    projectContainer.setAttribute("data-project-id", `${projectObject.id}`);
+    projectContainer.setAttribute("class", "project-container");
+
+    projectsContainer.appendChild(projectContainer);
+
+    const projectTitle = document.createElement("p");
+    projectTitle.textContent = title;
+
+    const projectDescription = document.createElement("p");
+    projectDescription.textContent = description;
+
+    projectContainer.appendChild(projectTitle);
+    projectContainer.appendChild(projectDescription);
+}
