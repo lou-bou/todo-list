@@ -15,6 +15,10 @@ class Project {
     addTodo(todo) {
         this.todos.push(todo);
     }
+
+    deleteTodo(todo) {
+        this.todos.splice(this.todos.indexOf(todo), 1);
+    }
 }
 
 export class Todo {
@@ -42,6 +46,11 @@ export class Todo {
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
+    }
+
+    deleteTodoObject() {
+        defaultProject.deleteTodo(this);
+        console.log(defaultProject.todos);
     }
 }
 

@@ -74,7 +74,10 @@ const todoDOM = (function () {
         todoStatus.setAttribute("name", "todoStatus");
 
         const todoEdit = document.createElement("button");
-        todoEdit.textContent = "Edit Todo"
+        todoEdit.textContent = "Edit Todo";
+
+        const todoDelete = document.createElement("button");
+        todoDelete.textContent = "Delete Todo";
 
         todoContainer.appendChild(todoTitle);
         todoContainer.appendChild(todoDescription);
@@ -83,6 +86,7 @@ const todoDOM = (function () {
         todoContainer.appendChild(todoNotes);
         todoContainer.appendChild(todoStatus);
         todoContainer.appendChild(todoEdit);
+        todoContainer.appendChild(todoDelete);
 
         todoStatus.addEventListener("click", () => {
             changeStatus(todoStatus, todo); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
@@ -124,6 +128,11 @@ const todoDOM = (function () {
                 todoPriority.textContent = newPriority;
                 todoNotes.textContent = newNotes;
             }
+        });
+
+        todoDelete.addEventListener("click", () => {
+            body.removeChild(todoContainer);
+            todo.deleteTodoObject();
         });
     };
 
