@@ -22,6 +22,11 @@ class Project {
     }
 }
 
+export function createProjectObject(title, description) {
+    let newProject = new Project(title, description);
+    return newProject;
+}
+
 export class Todo {
     id;
     title; // string

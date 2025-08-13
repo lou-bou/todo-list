@@ -46,12 +46,12 @@ submitTodoButton.addEventListener("click", () => {
 });
 
 const createTodoDOM = (todo, title, description, dueDate, priority, notes) => {
-    const body = document.querySelector("body");
+    const todosContainer = document.querySelector("#todos");
     const todoContainer = document.createElement("div");
     todoContainer.setAttribute("data-todo-id", `${todo.id}`);
     todoContainer.setAttribute("class", "todo-container");
 
-    body.appendChild(todoContainer);
+    todosContainer.appendChild(todoContainer);
 
     const todoTitle = document.createElement("p");
     todoTitle.textContent = title;
@@ -131,7 +131,7 @@ const createTodoDOM = (todo, title, description, dueDate, priority, notes) => {
     });
 
     todoDelete.addEventListener("click", () => {
-        body.removeChild(todoContainer);
+        todosContainer.removeChild(todoContainer);
         todo.deleteTodoObject();
     });
 };

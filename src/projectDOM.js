@@ -1,3 +1,5 @@
+import { createProjectObject } from "./index.js";
+
 const addProjectButton = document.querySelector(".add-project");
 const submitProjectButton = document.querySelector("#project-dialog .submit");
 const cancelProjectButton = document.querySelector("#project-dialog .cancel");
@@ -15,4 +17,9 @@ cancelProjectButton.addEventListener("click", () => {
 submitProjectButton.addEventListener("click", () => {
     let title = projectForm.projectTitle.value;
     let description = projectForm.projectDescription.value;
+
+    if (title) {
+        let project = createProjectObject(title, description);
+
+    }
 });
