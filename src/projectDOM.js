@@ -51,10 +51,19 @@ function createProjectDOM(projectObject, title, description) {
     projectContainer.appendChild(projectEdit);
 
     projectEdit.addEventListener("click", () => {
+        prepareEditForm(projectTitle.textContent, projectDescription.textContent);
         projectEditDialog.showModal();
     });
 
     cancelEditProjectButton.addEventListener("click", () => {
         projectEditDialog.close();
     });
+}
+
+function prepareEditForm(currentTitle, currentDescription) {
+    const newTitleInput = document.querySelector("#new-projectTitle");
+    newTitleInput.setAttribute("value", currentTitle);
+
+    const newDescriptionInput = document.querySelector("#new-projectDescription");
+    newDescriptionInput.setAttribute("value", currentDescription);
 }
