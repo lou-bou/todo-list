@@ -58,6 +58,18 @@ function createProjectDOM(projectObject, title, description) {
     cancelEditProjectButton.addEventListener("click", () => {
         projectEditDialog.close();
     });
+
+    submitEditProjectButton.addEventListener("click", () => {
+        let newTitle = projectEditForm.projectTitle.value;
+        let newDescription = projectEditForm.projectDescription.value;
+
+        if (newTitle) {
+            projectObject.update(newTitle, newDescription);
+
+            projectTitle.textContent = newTitle;
+            projectDescription.textContent = newDescription;
+        }
+    });
 }
 
 function prepareEditForm(currentTitle, currentDescription) {

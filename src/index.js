@@ -16,6 +16,11 @@ class Project {
         this.todos = [];
     }
 
+    update(title, description) {
+        this.title = title;
+        this.description = description;
+    }
+
     addTodo(todo) {
         this.todos.push(todo);
     }
@@ -30,7 +35,7 @@ export function createProjectObject(title, description) {
     return newProject;
 }
 
-export class Todo {
+class Todo {
     id;
     title; // string
     description; // string
@@ -49,7 +54,7 @@ export class Todo {
         this.check = false;
     }
 
-    updateTodoObject(title, description, dueDate, priority, notes) {
+    update(title, description, dueDate, priority, notes) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -57,7 +62,7 @@ export class Todo {
         this.notes = notes;
     }
 
-    deleteTodoObject() {
+    delete() {
         defaultProject.deleteTodo(this);
         console.log(defaultProject.todos);
     }
