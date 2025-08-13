@@ -35,9 +35,17 @@ export class Todo {
         this.notes = notes;
         this.check = false;
     }
+
+    updateTodoObject(title, description, dueDate, priority, notes) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.notes = notes;
+    }
 }
 
-export function createTodoObject(todoForm, title, description, dueDate, priority, notes) {
+export function createTodoObject(title, description, dueDate, priority, notes) {
     let newTodo = new Todo(title, description, dueDate, priority, notes);
     defaultProject.addTodo(newTodo);
     return newTodo;

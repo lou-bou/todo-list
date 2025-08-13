@@ -37,8 +37,12 @@ const todoDOM = (function () {
         }
 
         let notes = todoForm.notes.value;
-        let todo = createTodoObject(title, description, dueDate, priority, notes);
-        createTodoDOM(todo, title, description, dueDate, priority, notes);
+
+        if (title && dueDate && priority) {
+            console.log(title);
+            let todo = createTodoObject(title, description, dueDate, priority, notes);
+            createTodoDOM(todo, title, description, dueDate, priority, notes);
+        }
     });
 
     const createTodoDOM = (todo, title, description, dueDate, priority, notes) => {
@@ -110,6 +114,16 @@ const todoDOM = (function () {
             }
 
             let newNotes = todoEditForm.notes.value;
+
+            if (newTitle && newDueDate && newPriority) {
+                todo.updateTodoObject(newTitle, newDescription, newDueDate, newPriority, newNotes);
+
+                todoTitle.textContent = newTitle;
+                todoDescription.textContent = newDescription;
+                todoDueDate.textContent = newDueDate;
+                todoPriority.textContent = newPriority;
+                todoNotes.textContent = newNotes;
+            }
         });
     };
 
