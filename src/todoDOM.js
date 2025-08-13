@@ -120,7 +120,7 @@ const createTodoDOM = (todoObject, title, description, dueDate, priority, notes)
         let newNotes = todoEditForm.notes.value;
 
         if (newTitle && newDueDate && newPriority) {
-            todo.updateTodoObject(newTitle, newDescription, newDueDate, newPriority, newNotes);
+            todoObject.updateTodoObject(newTitle, newDescription, newDueDate, newPriority, newNotes);
 
             todoTitle.textContent = newTitle;
             todoDescription.textContent = newDescription;
@@ -132,7 +132,7 @@ const createTodoDOM = (todoObject, title, description, dueDate, priority, notes)
 
     todoDelete.addEventListener("click", () => {
         todosContainer.removeChild(todoContainer);
-        todo.deleteTodoObject();
+        todoObject.deleteTodoObject();
     });
 };
 
