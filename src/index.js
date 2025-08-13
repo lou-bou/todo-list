@@ -1,5 +1,6 @@
 import { format } from "date-fns";
-import "./dom.js";
+import "./todoDOM.js";
+import "./projectDOM.js";
 
 class Project {
     todos; // string
