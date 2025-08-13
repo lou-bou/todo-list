@@ -20,6 +20,5 @@ submitProjectButton.addEventListener("click", () => {
 
     if (title) {
         let project = createProjectObject(title, description);
-
     }
 });
