@@ -7,7 +7,7 @@ const createDefaultProjectDOM = (function() {
 
     projectsContainer.appendChild(projectContainer);
 
-    const title = document.createElement("p");
+    const title = document.createElement("button");
     title.textContent = "Default";
 
     const description = document.createElement("p");
@@ -54,7 +54,7 @@ function createProjectDOM(projectObject, title, description) {
 
     projectsContainer.appendChild(projectContainer);
 
-    const projectTitle = document.createElement("p");
+    const projectTitle = document.createElement("button");
     projectTitle.textContent = title;
 
     const projectDescription = document.createElement("p");
