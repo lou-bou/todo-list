@@ -1,5 +1,22 @@
 import { createProjectObject } from "./index.js";
 
+const createDefaultProjectDOM = (function() {
+    const projectsContainer = document.querySelector("#projects");
+    const projectContainer = document.createElement("div");
+    projectContainer.setAttribute("class", "project-container");
+
+    projectsContainer.appendChild(projectContainer);
+
+    const title = document.createElement("p");
+    title.textContent = "Default";
+
+    const description = document.createElement("p");
+    description.textContent = "The default project";
+
+    projectContainer.appendChild(title);
+    projectContainer.appendChild(description);
+})();
+
 const addProjectButton = document.querySelector(".add-project");
 const submitProjectButton = document.querySelector("#project-dialog .submit");
 const cancelProjectButton = document.querySelector("#project-dialog .cancel");
