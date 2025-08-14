@@ -80,4 +80,4 @@ export function createTodoObject(title, description, dueDate, priority, notes) {
     return newTodo;
 }
 
-let defaultProject = new Project("Default", "The default project");
+export let defaultProject = new Project("Default", "The default project");

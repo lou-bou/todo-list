@@ -1,20 +1,33 @@
-import { createProjectObject } from "./index.js";
+import { createProjectObject, defaultProject } from "./index.js";
+import { createTodoDOM } from "./todoDOM.js";
 
-const createDefaultProjectDOM = (function() {
+const createDefaultProjectDOM = (function() { // should probably find a way to not rewrite all the code thats in createProjectDOM here
     const projectsContainer = document.querySelector("#projects");
     const projectContainer = document.createElement("div");
     projectContainer.setAttribute("class", "project-container");
 
     projectsContainer.appendChild(projectContainer);
 
-    const title = document.createElement("button");
-    title.textContent = "Default";
+    const projectTitle = document.createElement("button");
+    projectTitle.textContent = "Default";
 
-    const description = document.createElement("p");
-    description.textContent = "The default project";
+    const projectDescription = document.createElement("p");
+    projectDescription.textContent = "The default project";
 
-    projectContainer.appendChild(title);
-    projectContainer.appendChild(description);
+    projectContainer.appendChild(projectTitle);
+    projectContainer.appendChild(projectDescription);
+
+    projectTitle.addEventListener("click", () => {
+        const todosContainer = document.querySelector("#todos");
+        console.log(defaultProject.todos);
+        todosContainer.innerHTML = "";
+        if (defaultProject.todos) {
+            defaultProject.todos.forEach((todoObject) => {
+                createTodoDOM(todoObject, todoObject.title, todoObject.description, todoObject.dueDate, todoObject.priority, todoObject.notes);
+            });
+        }
+        
+    });
 })();
 
 const addProjectButton = document.querySelector(".add-project");
@@ -70,6 +83,18 @@ function createProjectDOM(projectObject, title, description) {
     projectContainer.appendChild(projectDescription);
     projectContainer.appendChild(projectEdit);
     projectContainer.appendChild(projectDelete);
+
+    projectTitle.addEventListener("click", () => {
+        const todosContainer = document.querySelector("#todos");
+        console.log(projectObject.todos);
+        todosContainer.innerHTML = "";
+        if (projectObject.todos) {
+            projectObject.todos.forEach((todoObject) => {
+                createTodoDOM(todoObject, todoObject.title, todoObject.description, todoObject.dueDate, todoObject.priority, todoObject.notes);
+            });
+        }
+        
+    });
 
     projectEdit.addEventListener("click", () => {
         prepareEditForm(projectTitle.textContent, projectDescription.textContent);

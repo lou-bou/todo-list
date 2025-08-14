@@ -52,7 +52,7 @@ submitTodoButton.addEventListener("click", () => {
     }
 });
 
-const createTodoDOM = (todoObject, title, description, dueDate, priority, notes) => {
+export const createTodoDOM = (todoObject, title, description, dueDate, priority, notes) => {
     const todosContainer = document.querySelector("#todos");
     const todoContainer = document.createElement("div");
     todoContainer.setAttribute("data-todo-id", `${todoObject.id}`);
