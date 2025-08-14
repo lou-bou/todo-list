@@ -6,8 +6,7 @@
     <title>Todo List</title>
 </head>
 <body>
-    <button class="add-project">Add Project</button>
-    <button class="add-todo">Add Todo</button>
+    <!-- DIALOGS: dialog forms for creation and editing of todos/projects -->
     <dialog id="todo-dialog">
         <form action="" method="dialog" id="todo-form">
             <div>
@@ -134,7 +133,15 @@
             </div>
         </form>
     </dialog>
-    <div id="projects"></div>
-    <div id="todos"></div>
+
+    <div id="projects-panel">
+        <button class="add-project">Add Project</button>
+        <div id="projects"></div>
+    </div>
+
+    <div id="todos-panel">
+        <button class="add-todo">Add Todo</button>
+        <div id="todos"></div>
+    </div>
 </body>
 </html>

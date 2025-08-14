@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import "./todoDOM.js";
 import "./projectDOM.js";
-import "./style.css";
+import "./general.css";
 
 class Project {
     id;
