@@ -12,15 +12,17 @@ const createDefaultProjectDOM = (function() { // should probably find a way to n
     projectTitle.textContent = "Default";
 
     const projectDescription = document.createElement("p");
-    projectDescription.textContent = "The default project";
+    projectDescription.textContent = "The default project that contains all todos.";
 
     projectContainer.appendChild(projectTitle);
     projectContainer.appendChild(projectDescription);
 
     projectTitle.addEventListener("click", () => {
         const todosContainer = document.querySelector("#todos");
-        console.log(defaultProject.todos);
         todosContainer.innerHTML = "";
+        
+        currentProject = defaultProject;
+
         if (defaultProject.todos) {
             defaultProject.todos.forEach((todoObject) => {
                 createTodoDOM(todoObject, todoObject.title, todoObject.description, todoObject.dueDate, todoObject.priority, todoObject.notes);
@@ -59,6 +61,8 @@ submitProjectButton.addEventListener("click", () => {
     }
 });
 
+export let currentProject;
+
 function createProjectDOM(projectObject, title, description) {
     const projectsContainer = document.querySelector("#projects");
     const projectContainer = document.createElement("div");
@@ -86,8 +90,10 @@ function createProjectDOM(projectObject, title, description) {
 
     projectTitle.addEventListener("click", () => {
         const todosContainer = document.querySelector("#todos");
-        console.log(projectObject.todos);
         todosContainer.innerHTML = "";
+
+        currentProject = projectObject;
+
         if (projectObject.todos) {
             projectObject.todos.forEach((todoObject) => {
                 createTodoDOM(todoObject, todoObject.title, todoObject.description, todoObject.dueDate, todoObject.priority, todoObject.notes);

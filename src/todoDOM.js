@@ -6,6 +6,7 @@ Same problem in projectDOM.js
 */
 
 import { createTodoObject } from "./index.js";
+import { currentProject } from "./projectDOM.js";
 
 const addTodoButton = document.querySelector(".add-todo");
 const submitTodoButton = document.querySelector("#todo-form .submit");
@@ -47,7 +48,7 @@ submitTodoButton.addEventListener("click", () => {
 
     if (title && dueDate && priority) {
         console.log(title);
-        let todoObject = createTodoObject(title, description, dueDate, priority, notes);
+        let todoObject = createTodoObject(currentProject, title, description, dueDate, priority, notes);
         createTodoDOM(todoObject, title, description, dueDate, priority, notes);
     }
 });

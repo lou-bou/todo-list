@@ -74,9 +74,12 @@ class Todo {
     }
 }
 
-export function createTodoObject(title, description, dueDate, priority, notes) {
+export function createTodoObject(project, title, description, dueDate, priority, notes) {
     let newTodo = new Todo(title, description, dueDate, priority, notes);
     defaultProject.addTodo(newTodo);
+    if (project && project != defaultProject) {
+        project.addTodo(newTodo);
+    }
     return newTodo;
 }
 
