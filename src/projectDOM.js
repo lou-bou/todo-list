@@ -1,7 +1,7 @@
-import { createProjectObject, defaultProject } from "./index.js";
+import { createProjectObject } from "./index.js";
 import { createTodoDOM } from "./todoDOM.js";
 
-const createDefaultProjectDOM = (function() { // should probably find a way to not rewrite all the code thats in createProjectDOM here
+export const createDefaultProjectDOM = function(defaultProject) { // should probably find a way to not rewrite all the code thats in createProjectDOM here
     const projectsContainer = document.querySelector("#projects");
     const projectContainer = document.createElement("div");
     projectContainer.setAttribute("class", "project-container");
@@ -9,10 +9,10 @@ const createDefaultProjectDOM = (function() { // should probably find a way to n
     projectsContainer.appendChild(projectContainer);
 
     const projectTitle = document.createElement("button");
-    projectTitle.textContent = "Default";
+    projectTitle.textContent = defaultProject.title;
 
     const projectDescription = document.createElement("p");
-    projectDescription.textContent = "The default project that contains all todos.";
+    projectDescription.textContent = defaultProject.description;
 
     projectContainer.appendChild(projectTitle);
     projectContainer.appendChild(projectDescription);
@@ -30,7 +30,7 @@ const createDefaultProjectDOM = (function() { // should probably find a way to n
         }
         
     });
-})();
+};
 
 const addProjectButton = document.querySelector(".add-project");
 const submitProjectButton = document.querySelector("#project-dialog .submit");
