@@ -7,12 +7,14 @@ import "./todos.css";
 
 class Project {
     id;
+    type;
     todos; // string
     title; // string
     description; // string
 
     constructor(title, description) {
         this.id = crypto.randomUUID();
+        this.type = "project";
         this.title = title;
         this.description = description;
         this.todos = [];
@@ -38,11 +40,13 @@ class Project {
 
 export function createProjectObject(title, description) {
     let newProject = new Project(title, description);
+    localStorage.setItem(newProject.id, JSON.stringify(newProject));
     return newProject;
 }
 
 class Todo {
     id;
+    type;
     title; // string
     description; // string
     dueDate; // string (formatted date)
@@ -52,6 +56,7 @@ class Todo {
 
     constructor(title, description, dueDate, priority, notes) {
         this.id = crypto.randomUUID();
+        this.type = "todo";
         this.title = title;
         this.description = description;
         this.dueDate = dueDate; // use format(new Date(XXXX, YY, ZZ), "MM/dd/yyyy")
@@ -77,10 +82,15 @@ class Todo {
 export function createTodoObject(project, title, description, dueDate, priority, notes) {
     let newTodo = new Todo(title, description, dueDate, priority, notes);
     defaultProject.addTodo(newTodo);
+    localStorage.removeItem(defaultProject.id);
+    localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject));
     if (project && project != defaultProject) {
         project.addTodo(newTodo);
+        localStorage.removeItem(project.id);
+        localStorage.setItem(project.id, JSON.stringify(project));
     }
     return newTodo;
 }
 
 export let defaultProject = new Project("Default", "The default project");
+localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject));
