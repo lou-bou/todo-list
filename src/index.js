@@ -53,7 +53,7 @@ class Todo {
     dueDate; // string (formatted date)
     priority; // string ("High", "Medium" or "Low")
     notes; // string
-    check; // boolean (flase for unchecked and true for checked)
+    check; // boolean (false for unchecked and true for checked)
 
     constructor(title, description, dueDate, priority, notes) {
         this.id = crypto.randomUUID();
@@ -99,3 +99,16 @@ export function createTodoObject(project, title, description, dueDate, priority,
 export let defaultProject = new Project("Default", "The default project");
 defaultProject.id = "defaultProject";
 localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject));
+
+// Loading data from localStorage
+
+const projectIDs = Object.keys(localStorage);
+
+projectIDs.forEach((projectID) => {
+    let project = JSON.parse(localStorage.getItem(projectID));
+    let projectObject = new Project(project.title, project.description);
+    projectObject.id = project.id; // since creating the object creates a new id for it, i reset that id to the original id of the project object when it was first created
+    console.log(projectObject);
+});
+
+console.log(localStorage);
