@@ -39,7 +39,7 @@ class Project {
     }
 }
 
-export function createProjectObject(title, description) {
+export function createProjectObject(title, description) { // only used for new projects, not loading projects in localStorage
     let newProject = new Project(title, description);
     localStorage.setItem(newProject.id, JSON.stringify(newProject));
     return newProject;
