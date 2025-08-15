@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 import "./todoDOM.js";
 import "./projectDOM.js";
-import "./loadData.js";
 import "./general.css";
 import "./projects.css";
 import "./todos.css";
@@ -100,7 +99,9 @@ export let defaultProject = new Project("Default", "The default project");
 defaultProject.id = "defaultProject";
 localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject));
 
-// Loading data from localStorage
+// Loading data from localStorage. Using this in a different module and importing necessary functions/vars causes a circular dependency problem, and the only solution I found to this is putting everything related to loading data from localStorage in this module.
+
+import { createProjectDOM } from "./projectDOM.js";
 
 const projectIDs = Object.keys(localStorage);
 
@@ -108,7 +109,15 @@ projectIDs.forEach((projectID) => {
     let project = JSON.parse(localStorage.getItem(projectID));
     let projectObject = new Project(project.title, project.description);
     projectObject.id = project.id; // since creating the object creates a new id for it, i reset that id to the original id of the project object when it was first created
+
+    if (projectID != "defaultProject") {
+        createProjectDOM(projectObject, projectObject.title, projectObject.description);
+    }
+
+    console.log(project);
     console.log(projectObject);
+
+    console.log("\n");
 });
 
 console.log(localStorage);
