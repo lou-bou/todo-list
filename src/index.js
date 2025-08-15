@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import "./todoDOM.js";
 import "./projectDOM.js";
+import "./loadData.js";
 import "./general.css";
 import "./projects.css";
 import "./todos.css";
@@ -81,16 +82,20 @@ class Todo {
 
 export function createTodoObject(project, title, description, dueDate, priority, notes) {
     let newTodo = new Todo(title, description, dueDate, priority, notes);
+
     defaultProject.addTodo(newTodo);
     localStorage.removeItem(defaultProject.id);
     localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject));
+
     if (project && project != defaultProject) {
         project.addTodo(newTodo);
         localStorage.removeItem(project.id);
         localStorage.setItem(project.id, JSON.stringify(project));
     }
+    
     return newTodo;
 }
 
 export let defaultProject = new Project("Default", "The default project");
+defaultProject.id = "defaultProject";
 localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject));

@@ -63,7 +63,7 @@ submitProjectButton.addEventListener("click", () => {
 
 export let currentProject;
 
-function createProjectDOM(projectObject, title, description) {
+export function createProjectDOM(projectObject, title, description) {
     const projectsContainer = document.querySelector("#projects");
     const projectContainer = document.createElement("div");
     projectContainer.setAttribute("data-project-id", `${projectObject.id}`);
