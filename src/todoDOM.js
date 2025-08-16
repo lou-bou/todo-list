@@ -130,22 +130,20 @@ export const createTodoDOM = (todoObject, title, description, dueDate, priority,
     });
 
     submitEditTodoButton.addEventListener("click", () => {
-        let newTitle = todoEditForm.title.value;
-        let newDescription = todoEditForm.description.value;
-        let newDueDate = todoEditForm.dueDate.value;
+        let newTitle = todoEditForm.new_title.value;
+        let newDescription = todoEditForm.new_description.value;
+        let newDueDate = todoEditForm.new_dueDate.value;
         
         let newPriority;
-        if (document.querySelector("#new-low").checked) {
+        if (document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-low`).checked) {
             newPriority = "Low";
-        } else if (document.querySelector("#new-medium").checked) {
+        } else if (document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-medium`).checked) {
             newPriority = "Medium";
-        } else if (document.querySelector("#new-high").checked) {
+        } else if (document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-high`).checked) {
             newPriority = "High";
-        } else {
-            newPriority = null;
-        }
+        } 
 
-        let newNotes = todoEditForm.notes.value;
+        let newNotes = todoEditForm.new_notes.value;
 
         if (newTitle && newDueDate && newPriority) {
             todoObject.update(newTitle, newDescription, newDueDate, newPriority, newNotes);
