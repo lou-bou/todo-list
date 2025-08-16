@@ -40,8 +40,6 @@ submitTodoButton.addEventListener("click", () => {
         priority = "Medium";
     } else if (document.querySelector("#high").checked) {
         priority = "High";
-    } else {
-        priority = null; // this will be deleted later when i apply form validiations
     }
 
     let notes = todoForm.notes.value;
