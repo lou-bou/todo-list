@@ -38,7 +38,6 @@ const cancelProjectButton = document.querySelector("#project-dialog .cancel");
 const projectDialog = document.querySelector("#project-dialog");
 const projectForm = document.querySelector("#project-form");
 
-const submitEditProjectButtonTemplate = document.querySelector(".project-edit-dialog.template .edit");
 const cancelEditProjectButtonTemplate = document.querySelector(".project-edit-dialog.template .cancel");
 const projectEditDialogTemplate = document.querySelector(".project-edit-dialog.template");
 const projectEditFormTemplate = document.querySelector(".project-edit-form.template");
@@ -117,10 +116,13 @@ export function createProjectDOM(projectObject, title, description) {
 
     projectEditDialog.appendChild(projectEditForm);
 
-    const cancelEditProjectButton = cancelEditProjectButtonTemplate.cloneNode(true);
-    const submitEditProjectButton = submitEditProjectButtonTemplate.cloneNode(true);
+    const cancelEditProjectButton = document.querySelector(".project-edit-dialog .cancel");
 
-    projectEditForm.appendChild(cancelEditProjectButton);
+    const submitEditProjectButton = document.createElement("button");
+    submitEditProjectButton.textContent = "Edit";
+    submitEditProjectButton.setAttribute("type", "submit");
+    submitEditProjectButton.setAttribute("id", `submit-project-edit-${projectObject.id}`);
+
     projectEditForm.appendChild(submitEditProjectButton);
 
     projectEdit.addEventListener("click", () => {
