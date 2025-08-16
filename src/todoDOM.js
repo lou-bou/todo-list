@@ -14,10 +14,10 @@ const cancelTodoButton = document.querySelector("#todo-form .cancel");
 const todoDialog = document.querySelector("#todo-dialog");
 export const todoForm = document.querySelector("#todo-form");
 
-const submitEditTodoButton = document.querySelector("#todo-edit-form .edit");
-const cancelEditTodoButton = document.querySelector("#todo-edit-form .cancel");
-const todoEditDialog = document.querySelector("#todo-edit-dialog");
-const todoEditForm = document.querySelector("#todo-edit-form");
+const todoEditDialogTemplate = document.querySelector(".todo-edit-dialog.template");
+const todoEditFormTemplate = document.querySelector(".todo-edit-form.template");
+const submitEditTodoButtonTemplate = document.querySelector(".todo-edit-dialog.template .edit");
+const cancelEditTodoButtonTemplate = document.querySelector(".todo-edit-dialog.template .cancel");
 
 
 addTodoButton.addEventListener("click", () => {
@@ -98,12 +98,29 @@ export const createTodoDOM = (todoObject, title, description, dueDate, priority,
     todoContainer.appendChild(todoEdit);
     todoContainer.appendChild(todoDelete);
 
+    // SECTION FOR CREATING EDIT LOGIC
+    const body = document.querySelector("body");
+
+    const todoEditDialog = todoEditDialogTemplate.cloneNode(true);
+    todoEditDialog.setAttribute("id", `todo-edit-dialog-${todoObject.id}`);
+
+    body.appendChild(todoEditDialog);
+
+    const todoEditForm = todoEditFormTemplate.cloneNode(true);
+    todoEditForm.setAttribute("id", `todo-edit-form-${todoObject.id}`);
+
+    const submitEditTodoButton = submitEditTodoButtonTemplate.cloneNode(true);
+    submitEditTodoButton.setAttribute("id", `todo-submit-edit-${todoObject.id}`);
+
+    const cancelEditTodoButton = cancelEditTodoButtonTemplate.cloneNode(true);
+    cancelEditTodoButton.setAttribute("id", `todo-cancel-edit-${todoObject.id}`);
+
     todoStatus.addEventListener("click", () => {
         changeStatus(todoStatus, todoObject); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
     });
 
     todoEdit.addEventListener("click", () => {
-        prepareEditForm(todoTitle.textContent, todoDescription.textContent, todoDueDate.textContent, todoNotes.textContent);
+        prepareEditForm(todoObject, todoTitle.textContent, todoDescription.textContent, todoDueDate.textContent, todoNotes.textContent);
         todoEditDialog.showModal();
     });
 
@@ -155,24 +172,24 @@ const changeStatus = (todoStatusCheckbox, todoObject) => {
     console.log(todoObject);
 }
 
-const prepareEditForm = (currentTitle, currentDescription, currentDueDate, currentNotes) => {
-    const newTitleInput = document.querySelector("#todo-edit-form #new-title");
+const prepareEditForm = (todoObject, currentTitle, currentDescription, currentDueDate, currentNotes) => {
+    const newTitleInput = document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-title`);
     newTitleInput.setAttribute("value", currentTitle);
 
-    const newDescriptionInput = document.querySelector("#new-description");
+    const newDescriptionInput = document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-description`);
     newDescriptionInput.setAttribute("value", currentDescription);
 
-    const newDueDateInput = document.querySelector("#new-dueDate");
+    const newDueDateInput = document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-dueDate`);
     newDueDateInput.setAttribute("value", currentDueDate);
 
     if (document.querySelector("#low").checked) {
-        document.querySelector("#new-low").setAttribute("checked", "");
+        document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-low`).setAttribute("checked", "");
     } else if (document.querySelector("#medium").checked) {
-        document.querySelector("#new-medium").setAttribute("checked", "");
+        document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-medium`).setAttribute("checked", "");
     } else if (document.querySelector("#high").checked) {
-        document.querySelector("#new-high").setAttribute("checked", "");
+        document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-high`).setAttribute("checked", "");
     }
 
-    const newNotesInput = document.querySelector("#new-notes");
+    const newNotesInput = document.querySelector(`#todo-edit-dialog-${todoObject.id} #new-notes`);
     newNotesInput.setAttribute("value", currentNotes);
 }

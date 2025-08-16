@@ -38,10 +38,10 @@ const cancelProjectButton = document.querySelector("#project-dialog .cancel");
 const projectDialog = document.querySelector("#project-dialog");
 const projectForm = document.querySelector("#project-form");
 
-const submitEditProjectButton = document.querySelector("#project-edit-form .edit");
-const cancelEditProjectButton = document.querySelector("#project-edit-form .cancel");
-const projectEditDialog = document.querySelector("#project-edit-dialog");
-const projectEditForm = document.querySelector("#project-edit-form");
+const submitEditProjectButtonTemplate = document.querySelector(".project-edit-dialog.template .edit");
+const cancelEditProjectButtonTemplate = document.querySelector(".project-edit-dialog.template .cancel");
+const projectEditDialogTemplate = document.querySelector(".project-edit-dialog.template");
+const projectEditFormTemplate = document.querySelector(".project-edit-form.template");
 
 addProjectButton.addEventListener("click", () => {
     projectDialog.showModal();
@@ -102,8 +102,29 @@ export function createProjectDOM(projectObject, title, description) {
         
     });
 
+    // SECTION FOR EDIT LOGIC
+
+    const body = document.querySelector("body");
+
+    const projectEditDialog = projectEditDialogTemplate.cloneNode(true);
+    projectEditDialog.setAttribute("id", `project-edit-dialog-${projectObject.id}`);
+
+    projectEditDialog.innerHTML = "";
+
+    body.appendChild(projectEditDialog);
+
+    const projectEditForm = projectEditFormTemplate.cloneNode(true);
+
+    projectEditDialog.appendChild(projectEditForm);
+
+    const cancelEditProjectButton = cancelEditProjectButtonTemplate.cloneNode(true);
+    const submitEditProjectButton = submitEditProjectButtonTemplate.cloneNode(true);
+
+    projectEditForm.appendChild(cancelEditProjectButton);
+    projectEditForm.appendChild(submitEditProjectButton);
+
     projectEdit.addEventListener("click", () => {
-        prepareEditForm(projectTitle.textContent, projectDescription.textContent);
+        prepareEditForm(projectObject, projectTitle.textContent, projectDescription.textContent);
         projectEditDialog.showModal();
     });
 
@@ -129,10 +150,10 @@ export function createProjectDOM(projectObject, title, description) {
     });
 }
 
-function prepareEditForm(currentTitle, currentDescription) {
-    const newTitleInput = document.querySelector("#new-projectTitle");
+function prepareEditForm(projectObject, currentTitle, currentDescription) {
+    const newTitleInput = document.querySelector(`#project-edit-dialog-${projectObject.id} #new-projectTitle`);
     newTitleInput.setAttribute("value", currentTitle);
 
-    const newDescriptionInput = document.querySelector("#new-projectDescription");
+    const newDescriptionInput = document.querySelector(`#project-edit-dialog-${projectObject.id} #new-projectDescription`);
     newDescriptionInput.setAttribute("value", currentDescription);
 }
