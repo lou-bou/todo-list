@@ -16,9 +16,6 @@ export const todoForm = document.querySelector("#todo-form");
 
 const todoEditDialogTemplate = document.querySelector(".todo-edit-dialog.template");
 const todoEditFormTemplate = document.querySelector(".todo-edit-form.template");
-const submitEditTodoButtonTemplate = document.querySelector(".todo-edit-dialog.template .edit");
-const cancelEditTodoButtonTemplate = document.querySelector(".todo-edit-dialog.template .cancel");
-
 
 addTodoButton.addEventListener("click", () => {
     todoDialog.showModal();
@@ -54,7 +51,7 @@ submitTodoButton.addEventListener("click", () => {
 export const createTodoDOM = (todoObject, title, description, dueDate, priority, notes) => {
     const todosContainer = document.querySelector("#todos");
     const todoContainer = document.createElement("div");
-    todoContainer.setAttribute("data-todo-id", `${todoObject.id}`);
+    todoContainer.setAttribute("id", `todo-container-${todoObject.id}`);
     todoContainer.setAttribute("class", "todo-container");
 
     todosContainer.appendChild(todoContainer);
@@ -102,16 +99,22 @@ export const createTodoDOM = (todoObject, title, description, dueDate, priority,
     const todoEditDialog = todoEditDialogTemplate.cloneNode(true);
     todoEditDialog.setAttribute("id", `todo-edit-dialog-${todoObject.id}`);
 
+    todoEditDialog.innerHTML = "";
+
     body.appendChild(todoEditDialog);
 
     const todoEditForm = todoEditFormTemplate.cloneNode(true);
-    todoEditForm.setAttribute("id", `todo-edit-form-${todoObject.id}`);
+    
+    todoEditDialog.appendChild(todoEditForm);
 
-    const submitEditTodoButton = submitEditTodoButtonTemplate.cloneNode(true);
-    submitEditTodoButton.setAttribute("id", `todo-submit-edit-${todoObject.id}`);
+    const cancelEditTodoButton = document.querySelector(".todo-edit-dialog .cancel");
 
-    const cancelEditTodoButton = cancelEditTodoButtonTemplate.cloneNode(true);
-    cancelEditTodoButton.setAttribute("id", `todo-cancel-edit-${todoObject.id}`);
+    const submitEditTodoButton = document.createElement("button");
+    submitEditTodoButton.textContent = "Edit";
+    submitEditTodoButton.setAttribute("type", "submit");
+    submitEditTodoButton.setAttribute("id", `submit-todo-edit-${todoObject.id}`);
+
+    todoEditForm.appendChild(submitEditTodoButton);
 
     todoStatus.addEventListener("click", () => {
         changeStatus(todoStatus, todoObject); // this controls the application logic (changing todo object check bool value). this should be in index.js but i couldn't figure out how to do it.
